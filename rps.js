@@ -10,8 +10,6 @@ function getComputerChoice (){
     }
 }
 
-const aiChoice = getComputerChoice();
-const gamerChoice = 'rock';
 
 function gameplay (playerSelection, pcSelection) {
     let playerChoice = playerSelection.toLowerCase();
@@ -33,4 +31,36 @@ function gameplay (playerSelection, pcSelection) {
     }
 }
 
-console.log(gameplay(gamerChoice, aiChoice));
+function game() {
+
+    let pcScore = 0;
+    let gamerScore = 0;
+
+    for (let i = 0; i < 5; i++) {
+
+        let ai = getComputerChoice();
+        let gamer = prompt("Rock, paper or scissors?");
+
+        let result = gameplay(gamer, ai);
+        console.log(result);
+        
+        let char = result.charAt(0);
+
+        if (char === 'C') {
+            gamerScore++;
+        } else if (char === 'Y') {
+            pcScore++;
+        }
+
+    }
+
+    if (pcScore > gamerScore) {
+        console.log("After 5 rounds, you've lost " + pcScore + " to " + gamerScore);
+    } else if (gamerScore > pcScore) {
+        console.log("After 5 rounds, you've won " + gamerScore + " to " + pcScore);
+    } else {
+        console.log("After 5 rounds, you've tied " + pcScore + " to " + gamerScore);
+    }
+}
+
+game();
