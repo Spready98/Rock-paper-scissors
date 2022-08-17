@@ -14,7 +14,7 @@ function getComputerChoice (){
 function gameplay (playerSelection, pcSelection) {
     
     if (playerSelection === pcSelection) {
-        return "Tie! You both chose " + pcSelection;
+        return 8;
     } else if (playerSelection === 'rock' && pcSelection === 'paper') {
         return 0;
     } else if (playerSelection === 'paper' && pcSelection === 'rock') {
@@ -43,10 +43,16 @@ function game() {
 
     rock.addEventListener("click", function() {
         canWin = gameplay("rock", getComputerChoice());
-        if (canWin){
+
+        if (canWin === 8){
+            finalScore.textContent = "Tie! You both chose rock. Try again!";
+        }
+        else if (canWin){
             playerScore.textContent = "Player Score: " + ++gamerScore;
+            finalScore.textContent = "";
         } else {
             aiScore.textContent = "Computer Score: " + ++pcScore;
+            finalScore.textContent = "";
         }
 
         if (pcScore > 4 || gamerScore > 4) {
@@ -56,29 +62,42 @@ function game() {
     
     paper.addEventListener("click", function() {
         canWin = gameplay("paper", getComputerChoice());
-        if (canWin){
+        if (canWin === 8){
+            finalScore.textContent = "Tie! You both chose paper. Try again!";
+        }
+        else if (canWin){
             playerScore.textContent = "Player Score: " + ++gamerScore;
+            finalScore.textContent = "";
         } else {
             aiScore.textContent = "Computer Score: " + ++pcScore;
+            finalScore.textContent = "";
         }
 
         if (pcScore > 4 || gamerScore > 4) {
             showFinalScore(gamerScore, pcScore);
         }
+        
     });
     
     scissors.addEventListener("click", function() {
-        canWin = gameplay("scissor", getComputerChoice())
-        if (canWin){
+        canWin = gameplay("scissor", getComputerChoice());
+
+        if (canWin === 8){
+            finalScore.textContent = "Tie! You both chose scissor. Try again!";
+        }
+        else if (canWin){
             playerScore.textContent = "Player Score: " + ++gamerScore;
+            finalScore.textContent = "";
         } else {
             aiScore.textContent = "Computer Score: " + ++pcScore;
+            finalScore.textContent = "";
         }
 
         if (pcScore > 4 || gamerScore > 4) {
             showFinalScore(gamerScore, pcScore);
         }
     });
+
         
 }
 
@@ -105,7 +124,7 @@ const finalScore = document.createElement('div');
 div.classList.add("Scoreboard");
 playerScore.classList.add("score");
 aiScore.classList.add("score");
-finalScore.classList.add("score");
+finalScore.classList.add("score-Message");
 
 container.appendChild(div);
 div.appendChild(playerScore);
